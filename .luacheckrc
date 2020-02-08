@@ -1,4 +1,4 @@
 std = "max+love+busted"
 self = false
-globals = {}
+globals = { "moonpie" }
 exclude_files = {"ext/*"}

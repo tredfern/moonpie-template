@@ -1,4 +1,4 @@
-local moonpie = require "moonpie"
+moonpie = require "moonpie"
 
 
 function love.update()
