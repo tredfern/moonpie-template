@@ -1,6 +1,12 @@
 love.filesystem.setRequirePath("?.lua;?/init.lua;ext/?.lua;ext/?/init.lua;ext/moonpie/?.lua;ext/moonpie/?/init.lua;")
 moonpie = require "moonpie"
 
+function love.load()
+  -- app is a standard pattern to handle all the game logic and states
+  local app = require "game.app"
+  app.load()
+end
+
 
 function love.update()
   -- moonpie.update handles the mouse and keyboard behaviors
