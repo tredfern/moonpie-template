@@ -4,6 +4,7 @@
 -- separated out
 --
 
+require "assets.theme"
 local styles = require "moonpie.ui.styles"
 
 styles.fancy_title = {

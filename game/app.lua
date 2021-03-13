@@ -1,5 +1,6 @@
 require "assets.stylesheet"
 local moonpie = require "moonpie"
+local store = require "game.store"
 local components = require "moonpie.ui.components"
 local app = {}
 
@@ -7,6 +8,7 @@ local app = {}
 -- Called by main to specify the app should load
 --
 function app.load()
+  store.reset()
   app.hello_world()
 end
 
