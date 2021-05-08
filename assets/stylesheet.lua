@@ -13,12 +13,18 @@ styles.title = {
 }
 
 styles.main_menu = {
-  backgroundColor = Colors.light_accent,
+  backgroundColor = Colors.main,
+  cornerRadiusX = 4,
+  cornerRadiusY = 4,
   width = "45%",
   height = "30%",
   padding = 10,
 }
 
 styles.mainMenuButton = {
-  width = "100%"
+  width = "100%",
+  fontName = "default",
+  fontSize = 24,
+  cornerRadiusX = 10,
+  cornerRadiusY = 10,
 }
