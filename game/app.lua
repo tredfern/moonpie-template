@@ -1,7 +1,7 @@
 require "assets.stylesheet"
 local moonpie = require "moonpie"
 local store = require "game.store"
-local components = require "moonpie.ui.components"
+local Components = require "moonpie.ui.components"
 local app = {}
 
 --
@@ -9,7 +9,8 @@ local app = {}
 --
 function app.load()
   store.reset()
-  app.hello_world()
+  app.title()
+  moonpie.events.afterUpdate:add(app.update)
 end
 
 --
@@ -18,23 +19,40 @@ end
 --
 function app.render(scene)
   moonpie.render(
-    "ui",
-    components.body(scene)
+    Components.body(scene)
   )
 end
 
-function app.quit()
+function app.update()
+  if app.state == "playGame" then
+    local Shapes = require "game.rules.shapes"
+    local gameView = moonpie.ui.current.findByID("gameViewport")
+    store.dispatch(Shapes.actions.update(gameView.box.width, gameView.box.height))
+  end
+end
+
+function app.quitGame()
   love.event.quit()
 end
 
 --
 -- Example game state to render, in this case... hello world
 --
-function app.hello_world()
-  local hello_world = require "game.ui.hello_world"
-  app.render(hello_world {
-    quit_routine = app.quit
-  })
+function app.title()
+  local Title = require "game.ui.screens.title"
+  app.render(Title { gameTitle = "Moonpie Template" })
+  app.state = "title"
+end
+
+function app.newGame()
+  store.reset()
+
+  local Shapes = require "game.rules.shapes"
+  store.dispatch(Shapes.actions.setup())
+
+  local Game = require "game.ui.screens.game"
+  app.render(Game())
+  app.state = "playGame"
 end
 
 return app

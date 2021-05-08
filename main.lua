@@ -1,8 +1,12 @@
+
+--
+-- Set up require path to search ext directory and easily find moonpie libraries
+--
 love.filesystem.setRequirePath("?.lua;?/init.lua;ext/?.lua;ext/?/init.lua;ext/moonpie/?.lua;ext/moonpie/?/init.lua;")
-moonpie = require "moonpie"
+local moonpie = require "moonpie"
 
 function love.load()
-  -- app is a standard pattern to handle all the game logic and states
+  -- app provides a central location to route the game state
   local app = require "game.app"
   app.load()
 end
@@ -29,9 +33,9 @@ function love.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)
-  moonpie.keypressed(key, scancode, isrepeat)
+  moonpie.keyPressed(key, scancode, isrepeat)
 end
 
 function love.keyreleased(key, scancode)
-  moonpie.keyreleased(key, scancode)
+  moonpie.keyReleased(key, scancode)
 end

@@ -1,21 +1,17 @@
--- Copyright (c) 2021 Trevor Redfern
---
--- This software is released under the MIT License.
--- https://opensource.org/licenses/MIT
-
 local store = require "moonpie.redux.store"
 local combine_reducers = require "moonpie.redux.combine_reducers"
 
 local function getReducers()
   return combine_reducers {
-    settings = require "game.settings.reducer"
+    shapes = require "game.rules.shapes.reducer"
+    -- Add Reducers Here
   }
 end
 
 store.reset = function(state)
   store.createStore(
     getReducers(),
-    state
+    state or {}
   )
 end
 

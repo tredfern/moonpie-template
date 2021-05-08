@@ -6,13 +6,19 @@
 
 require "assets.theme"
 local styles = require "moonpie.ui.styles"
+local Colors = require "moonpie.graphics.colors"
 
-styles.fancy_title = {
-  color = "red"
+styles.title = {
+  backgroundColor = Colors.main
 }
 
-styles.hello_world = {
-  background_color = "light_gray",
-  margin = 10,
-  padding = 20
+styles.main_menu = {
+  backgroundColor = Colors.light_accent,
+  width = "45%",
+  height = "30%",
+  padding = 10,
+}
+
+styles.mainMenuButton = {
+  width = "100%"
 }
