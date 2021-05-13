@@ -19,7 +19,7 @@ end
 --
 function app.render(scene)
   moonpie.render(
-    Components.body { scene }
+    Components.body { content = scene }
   )
 end
 

@@ -9,7 +9,8 @@ local styles = require "moonpie.ui.styles"
 local Colors = require "moonpie.graphics.colors"
 
 styles.title = {
-  backgroundColor = Colors.main
+  backgroundColor = Colors.main,
+  height = "100%"
 }
 
 styles.main_menu = {
