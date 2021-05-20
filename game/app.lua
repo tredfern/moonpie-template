@@ -39,7 +39,7 @@ end
 -- Example game state to render, in this case... hello world
 --
 function app.title()
-  local Title = require "game.ui.screens.title"
+  local Title = require "game.ui.title"
   app.render(Title { gameTitle = "Moonpie Template" })
   app.state = "title"
 end
@@ -50,7 +50,7 @@ function app.newGame()
   local Shapes = require "game.rules.shapes"
   store.dispatch(Shapes.actions.setup())
 
-  local Game = require "game.ui.screens.game"
+  local Game = require "game.ui.game"
   app.render(Game())
   app.state = "playGame"
 end

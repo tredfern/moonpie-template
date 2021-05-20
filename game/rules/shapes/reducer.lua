@@ -1,5 +1,5 @@
 local createSlice = require "moonpie.redux.create_slice"
-local actionTypes = require "game.rules.shapes.actions.types"
+local actionTypes = require "game.rules.shapes.types"
 
 
 return createSlice {

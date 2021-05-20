@@ -1,5 +1,5 @@
 local Components = require "moonpie.ui.components"
-local GameScreen = require "game.ui.widgets.game_screen"
+local GameScreen = require "game.ui.game.game_screen"
 local App = require "game.app"
 
 

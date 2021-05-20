@@ -1,5 +1,5 @@
 local Components = require "moonpie.ui.components"
-local mainMenu = require "game.ui.widgets.main_menu"
+local mainMenu = require "game.ui.title.main_menu"
 
 local Title = Components("title", function(props)
   return {
