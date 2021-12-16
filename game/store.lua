@@ -1,9 +1,9 @@
-local store = require "moonpie.redux.store"
-local combine_reducers = require "moonpie.redux.combine_reducers"
+local store = require "moonpie.state.store"
+local combine_reducers = require "moonpie.state.combine_reducers"
 
 local function getReducers()
   return combine_reducers {
-    shapes = require "game.rules.shapes.reducer"
+    entities = require "moonpie.entities.reducer"
     -- Add Reducers Here
   }
 end

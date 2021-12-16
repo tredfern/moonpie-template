@@ -4,9 +4,10 @@
 -- https://opensource.org/licenses/MIT
 
 local Selectors = {}
+local Entities = require "moonpie.entities"
 
 function Selectors.getAll(state)
-  return state.shapes
+  return Entities.selectors.getAllWithComponents(state, "shape")
 end
 
 return Selectors

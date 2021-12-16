@@ -1,57 +1,26 @@
 -- Copyright (c) 2021 Trevor Redfern
--- 
+--
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Thunk = require "moonpie.redux.thunk"
+local Thunk = require "moonpie.state.thunk"
 local Colors = require "moonpie.graphics.colors"
+local Entities = require "moonpie.entities"
+local Shapes = require "game.entities.shapes"
 
 local Actions = {}
 Actions.types = require "game.rules.shapes.types"
-
-function Actions.add(shape, color, position, size)
-  return {
-    type = Actions.types.ADD,
-    payload = {
-      shape = shape,
-      color = color,
-      position = position,
-      size = size,
-      speed = { math.random(-50, 50), math.random(-50, 50) }
-    }
-  }
-end
 
 function Actions.setup()
   return Thunk(
     Actions.types.SETUP,
     function(dispatch)
-      dispatch(Actions.add("circle", Colors.red, { 125, 70 }, 50))
-      dispatch(Actions.add("circle", Colors.green, { 325, 220 }, 25))
-      dispatch(Actions.add("rectangle", Colors.blue, { 225, 120 }, 150))
-      dispatch(Actions.add("rectangle", Colors.purple, { 425, 420 }, 5))
+      dispatch(Entities.actions.add(Shapes.circle(Colors.red, 125, 70, 50)))
+      dispatch(Entities.actions.add(Shapes.circle(Colors.green, 325, 220, 25)))
+      dispatch(Entities.actions.add(Shapes.rectangle(Colors.blue, 225, 120, 150)))
+      dispatch(Entities.actions.add(Shapes.rectangle(Colors.purple, 425, 420, 5)))
     end
   )
-end
-
-function Actions.updatePosition(entityId, position)
-  return {
-    type = Actions.types.UPDATE_POSITION,
-    payload = {
-      entityId = entityId,
-      position = position
-    }
-  }
-end
-
-function Actions.updateSpeed(entityId, speed)
-  return {
-    type = Actions.types.UPDATE_SPEED,
-    payload = {
-      entityId = entityId,
-      speed = speed
-    }
-  }
 end
 
 function Actions.update(width, height)
@@ -63,19 +32,20 @@ function Actions.update(width, height)
       local dt = love.timer.getDelta()
 
       for _, v in ipairs(shapes) do
-        local nx = v.position[1] + (dt * v.speed[1])
-        local ny = v.position[2] + (dt * v.speed[2])
-        dispatch(Actions.updatePosition(v.entityId, { nx, ny }))
+        local nx = v.position.x + (dt * v.velocity.x)
+        local ny = v.position.y + (dt * v.velocity.y)
+        dispatch(Entities.actions.updateProperty(v, "position", { x = nx, y = ny }))
 
         if nx > width or nx < 0 then
-          dispatch(Actions.updateSpeed(v.entityId, { -v.speed[1], v.speed[2]}))
+          dispatch(Entities.actions.updateProperty(v, "velocity", { x = -v.velocity.x }))
         end
 
         if ny > height or ny < 0 then
-          dispatch(Actions.updateSpeed(v.entityId, { v.speed[1], -v.speed[2]}))
+          dispatch(Entities.actions.updateProperty(v, "velocity", { y = -v.velocity.y }))
         end
       end
     end
   )
 end
+
 return Actions
